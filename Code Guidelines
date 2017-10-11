@@ -1,0 +1,105 @@
+# Code Guidelines
+This document serves as an outline of the code used in the FarmAid Android application. The intention is that it will serve as a guide for future developers working on this project.
+
+Each java class used in the project is listed below (in alphabetical order) with relevant notes (including notes about methods).
+
+
+## BasicImageDownloader
+
+## BasicTextDownloader
+
+## ChatActivity
+
+	### onCreate
+	Initialize activity, assigning all UI elements to variables for accessing and assigning.
+
+	### onCreateOptionsMenu
+
+	### onOptionsItemSelected
+
+	### sendChatMessage
+
+	### receiveMessages
+
+## ChatArrayAdapter
+
+## ChatMessage
+
+## ChatMessenger
+
+## CropsDisplayActivity
+
+	### onCreate
+
+	### onCreateOptionsMenu
+
+	### onOptionsItemSelected
+
+
+## CropsDisplayAdapter
+
+## CropViewActivity
+
+	### onCreate
+
+	### onCreateOptionsMenu
+
+	### onOptionsItemSelected
+
+	### readFile
+	Return the given textfile as a String
+
+	### populateTutThumbnails
+	Check all folders in the currect dirPath folder. If a tutorial folder,  retrieve the index of that tutorial's name in image_titles, and if present there, add a thumbnail with the associated pre-defined thumbnail image
+
+	### getIndexInImageTitles
+	return the index of that tutorial's name within the list of pre-defined tutorial names
+
+## CropViewAdapter
+
+## ImageRef
+
+## ImageRef
+
+## LoginActivity
+
+
+
+## MainActivity
+
+	### onCreate
+
+	### onCreateOptionsMenu
+
+	### onOptionsItemSelected
+
+	### showProgress
+
+	### displayCrops
+
+	### message
+
+	### update
+
+	### deleteDir
+
+
+## TutorialActivity
+
+	### onCreate
+
+	### onCreateOptionsMenu
+
+	### onOptionsItemSelected
+
+	### prepareData
+
+	### readFile
+	Return the given textfile as a String
+
+	### splitSteps
+
+	### getTutImages
+
+
+## TutorialAdapter

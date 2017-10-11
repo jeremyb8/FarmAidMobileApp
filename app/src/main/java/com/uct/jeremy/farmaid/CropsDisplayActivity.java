@@ -50,12 +50,12 @@ public class CropsDisplayActivity extends AppCompatActivity {
             if(extras != null) {
                 dirPath = extras.getString("dirPath");
                 email = extras.getString("email");
-//                farmName = extras.getString("farmName");
+                farmName = extras.getString("farmName");
             }
         } else {
             dirPath = (String) savedInstanceState.getSerializable("dirPath");
             email = (String) savedInstanceState.getSerializable("email");
-//            farmName = (String) savedInstanceState.getSerializable("farmName");
+            farmName = (String) savedInstanceState.getSerializable("farmName");
         }
         Log.i(CropsDisplayActivity.this.toString(), ">>>>> DISPLAY CROPS directoryListing =\n"+dirPath);
 // Create an arrayList of Bitmaps of the images of crops available
@@ -110,7 +110,7 @@ public class CropsDisplayActivity extends AppCompatActivity {
 
     /**
      * @param path Directory to look inside
-     * @return all the images in the supplied directory as a Bitmap ArrayList
+     * @return all the images in the supplied directory path as a Bitmap ArrayList
      */
     private ArrayList<Bitmap> loadImagesFromStorage(String path)
     {

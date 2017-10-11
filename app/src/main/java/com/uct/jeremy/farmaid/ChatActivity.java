@@ -144,6 +144,11 @@ public class ChatActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Call the assigned chatMessenger to send the text held in the chatText TextView,
+     * first checking for any new messages
+     * @return true
+     */
     private boolean sendChatMessage(){
         try{
             receiveMessages();
@@ -155,6 +160,10 @@ public class ChatActivity extends AppCompatActivity{
         return true;
     }
 
+    /**
+     * Call the assigned chatMessenger to receive all new messages on the server
+     * @return true
+     */
     private boolean receiveMessages(){
         try{
             chatMessenger.handleMessage(null, false);
