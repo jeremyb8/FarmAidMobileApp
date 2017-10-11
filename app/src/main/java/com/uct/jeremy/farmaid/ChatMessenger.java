@@ -28,21 +28,26 @@ import java.util.ArrayList;
  * Adapted from https://github.com/vad-zuev/ImageDownloader
  */
 
-public class ChatMessenger {
+class ChatMessenger {
     private final String TAG = this.getClass().getSimpleName();
-    Activity activity;
-    File messageLog;
-    ChatArrayAdapter adp;
+    private Activity activity;
+    private File messageLog;
+    private ChatArrayAdapter adp;
     String email;
 
-    public ChatMessenger(Activity activity, File messageLog, ChatArrayAdapter adp, String email){
+    ChatMessenger(Activity activity, File messageLog, ChatArrayAdapter adp, String email){
         this.activity = activity;
         this.messageLog = messageLog;
         this.adp = adp;
         this.email = email;
     }
 
-    public void handleMessage(final String message, final Boolean type) {
+    /**
+     * Send/receive message(s).
+     * @param message Message to be sent (or null if receiving)
+     * @param type T = sending message, F = receiving
+     */
+    void handleMessage(final String message, final Boolean type) {
     // boolean type reflects whether a message is being sent (T), or a call to check for new messages is being made (F)
         Log.i(TAG, ">>>>> ChatMessenger handleMessage email:\n"+email);
 
@@ -68,7 +73,7 @@ public class ChatMessenger {
 
                 try {
                     // Compose http post message and set desired method
-                    String postData = "";
+                    String postData;
                     if(type){ // case where user is sending message
                         serverUrl += "/android/send_message";
 //                        postData = URLEncoder.encode(email+"<>"+message, "UTF-8");
@@ -104,7 +109,7 @@ public class ChatMessenger {
                     // Receive result of POST request
                     InputStream inputStream = connection.getInputStream();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-                    String line = "";
+                    String line;
                     while ((line = bufferedReader.readLine()) != null){
                         result += line;
                     }
@@ -216,7 +221,7 @@ public class ChatMessenger {
         }.execute();
     }
 
-    /*
+    /**
     * Takes a string representing the response from the server (messagesText), indexes according to each
     * message's start, and returns a string array of the text in the messages
     * */
@@ -244,7 +249,7 @@ public class ChatMessenger {
         return messages;
     }
 
-    /*
+    /**
     * Takes a string representing the response from the server (messagesText), indexes according to each
     * time stamp's start, and returns a string array of the times in the messages
     * */
@@ -274,12 +279,12 @@ public class ChatMessenger {
         return times;
     }
 
-    /*
+    /**
     * Takes a string representing the response from the server (messagesText), indexes according to each
-    * message's start, and returns a string array of the text in the messages
+    * user name's start, and returns a string array of the users in the messages
     * */
     private Boolean[] splitUsers (String messagesText) throws IOException{
-        String[] users = null;
+        String[] users;
         Boolean[] usersBoolean = null;
         ArrayList<Integer> indexes = new ArrayList<>();
         int i = messagesText.indexOf("From:");
@@ -317,7 +322,11 @@ public class ChatMessenger {
         return usersBoolean;
     }
 
-    public void displayHistory(){
+    /**
+     * Updates the UI to display the message history associated with the device, pulling all
+     * messages from the MessageLog.txt file held in the phone's internal memory
+     */
+    void displayHistory(){
         String line;
         String logText = "";
         try {

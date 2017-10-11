@@ -1,50 +1,123 @@
-# Code Guidelines
+Code Guidelines
 This document serves as an outline of the code used in the FarmAid Android application. The intention is that it will serve as a guide for future developers working on this project.
 
+
+# Overview
+
+## Crop Viewing
+Images and text that are downloaded from the server to be displayed in the crop viewing section of the app are organised in internal memory under a pre-defined hierarchy, with pre-defined naming standards.
+
+For example, the path from internal memory to the text associated with a tutorial for planting Grapes on a farm caled Bfarm would be:
+		*/farm_Bfarm/crops/crop_Grapes/tutorial_Planting/tutorial_Planting.txt
+
+Farm, crop, and tutorial names are all preceded by a label based on their type followed by an underscore (i.e. farm_Bfarm, crop_Grapes, tutorial_Planting above).
+
+### Crops
+Crops are held within their folder (like crop_Grapes above), which contain a thumbnail image which is always saved as "thumbnail_<cropName>.png", as well as a textfile holding text displayed in their summary saved as "thumbnail_<cropName>.txt".
+
+For example, the thumbnail image for Grapes above would have the directory path:
+		*/farm_Bfarm/crops/crop_Grapes/thumbnail_Grapes.png
+
+### Tutorials
+Tutorials are held within their folder (like tutorial_Planting above), which contains a series of images which are always saved as "<tutorialName><numberInSequence>.png", as well as one textfile containing text associated with all steps saved as "tutorial_<tutorialName>.txt".
+
+For example, the image for the second step involved in planting Grapes above would have the directory path:
+		*/farm_Bfarm/crops/crop_Grapes/tutorial_Planting/Planting2.png
+
+While the text for the Planting tutorial would have the directory path:
+		*/farm_Bfarm/crops/crop_Grapes/tutorial_Planting/tutorial_Planting.txt
+
+
+## Messaging
+All sent and received messages are saved to a text file in internal memory named "messageLog.txt". The format of these messages in the text file is as follows:
+
+Message:<Message text here>
+Time:<YYYY-MM-DD HH:MM>
+From:<user/super>
+(user is the value assigned to all messages SENT from the phone, super is assigned to all those that have been RECEIVED by the phone)
+
+Whenever the Android app communicates sending/receiving a message to/from the server, the server's response is the sent message, or all the received messages in this format. Upon receiving this response, the Android app writes them to the messageLog.txt file. When the user opens up the ChatActivity view, the FarmAid accessess this log file and updates the UI with the message history appropriately.
+
+
+# Java Files
 Each java class used in the project is listed below (in alphabetical order) with relevant notes (including notes about methods).
 
-
 ## BasicImageDownloader
+A helper class that handles the network connectivity and saving to memory involved in downloading images from the server.
+Adapted from https://github.com/vad-zuev/ImageDownloader
 
 ## BasicTextDownloader
+An adaption of BasicImageDownloader, with the same functionality but for text (rather than image) files
 
 ## ChatActivity
 
 	### onCreate
 	Initialize activity, assigning all UI elements to variables for accessing and assigning.
+	Retrieve extras from the incoming intent, and assigning them.
 
 	### onCreateOptionsMenu
+	Create the toolbar_menu, and disable any irrelevant toolbar items.
 
 	### onOptionsItemSelected
+	Start a new intent based on which item in the toolbar_menu the user has selected.
 
 	### sendChatMessage
+	Call the assigned chatMessenger to send the text held in the chatText textview, first checking for any new messages
 
 	### receiveMessages
+	Call the assigned chatMessenger to receive all new messages on the server
 
 ## ChatArrayAdapter
+An adapter used in populating the ChatActivity. Stores all messages, and handles the logic involved in displaying them.
 
 ## ChatMessage
+A holder class that contains variables relevant to an individual message.
 
 ## ChatMessenger
+A helper class that handles all network connectivity and logic associated with messenging.
+
+	### handleMessage
+	Send/receive message(s).
+
+	### splitMessages
+	Takes a string representing the response from the server, indexes according to each message's start, and returns a string array of the text in the messages.
+
+	### splitTimes
+	Takes a string representing the response from the server, indexes according to each time stamp's start, and returns a string array of the times in the messages
+
+	### splitUsers
+	Takes a string representing the response from the server, indexes according to each user name's start, and returns a string array of the users in the messages
+
+	### displayHistory
+	Updates the UI to display the message history associated with the device, pulling all messages from the messageLog.txt file held in the phone's internal memory.
 
 ## CropsDisplayActivity
 
 	### onCreate
+	As in ChatActivity
 
 	### onCreateOptionsMenu
+	As in ChatActivity
 
 	### onOptionsItemSelected
+	As in ChatActivity
 
+	### loadImagesfromStorage
+	Return all the images in the supplied directory path as a Bitmap ArrayList
 
 ## CropsDisplayAdapter
+An adapter used in populating CropsDisplayActivity.
 
 ## CropViewActivity
 
 	### onCreate
+	As in ChatActivity
 
 	### onCreateOptionsMenu
+	As in ChatActivity
 
 	### onOptionsItemSelected
+	As in ChatActivity
 
 	### readFile
 	Return the given textfile as a String
@@ -56,41 +129,52 @@ Each java class used in the project is listed below (in alphabetical order) with
 	return the index of that tutorial's name within the list of pre-defined tutorial names
 
 ## CropViewAdapter
+An adapter used in populating CropView.
 
 ## ImageRef
-
-## ImageRef
+A holder class associated with pre-defined images, and relevant variables.
 
 ## LoginActivity
-
-
+	This is the template login activity supplied by Android Studio
 
 ## MainActivity
 
 	### onCreate
+	As in ChatActivity
 
 	### onCreateOptionsMenu
+	As in ChatActivity
 
 	### onOptionsItemSelected
+	As in ChatActivity
 
 	### showProgress
+	Shows the progress UI and hides the home page.
+    This method copied and adapted from Android studio's template login activity.
 
 	### displayCrops
+	Called when the user taps the Crops button, moves the intent of the app to CropsDisplayActivity.
 
 	### message
+	Called when the user taps the Messaging button, moves the intent of the app to ChatActivity.
 
 	### update
+	Called when the user taps the Update button, hides the Home Page layout and shows the progress screen while an Async Task is run to handle network connectivity.
 
 	### deleteDir
+	A helper method for clearing phone's internal memory contents during debugging.
 
 
 ## TutorialActivity
 
 	### onCreate
+	As in ChatActivity
 
 	### onCreateOptionsMenu
+	As in ChatActivity
 
 	### onOptionsItemSelected
+	As in ChatActivity
 
 	### prepareData
 
@@ -103,3 +187,4 @@ Each java class used in the project is listed below (in alphabetical order) with
 
 
 ## TutorialAdapter
+An adapter used in populating TutorialActivity.
