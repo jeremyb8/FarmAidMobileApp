@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!-- Login progress -->
+    <LinearLayout
+        android:id="@+id/login_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:text="This is some dummy text for testing"
+            android:textSize="@dimen/header_text_size"
+            android:gravity="center"
+
+            android:id="@+id/progress_status"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_button_square_length" />
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_gravity="center_horizontal"
+             />
+    </LinearLayout>
+
+
+    <!--Home page-->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/content_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.uct.jeremy.farmaid.MainActivity"
+        tools:layout_editor_absoluteY="81dp"
+        tools:layout_editor_absoluteX="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:background="@color/greenDark"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" />
+
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:text="From here you can:"
+            android:textSize="17sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+
+            app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+        <TableLayout
+                android:stretchColumns="*"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:layout_marginTop="20dp"
+                android:padding="@dimen/text_margin"
+                android:weightSum="3"
+
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/welcomeText"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TableRow
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="displayCrops"
+                    tools:layout_editor_absoluteY="25dp"
+                    tools:layout_editor_absoluteX="8dp">
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+
+                        android:onClick="displayCrops"
+
+                        app:srcCompat="@drawable/crop_icon"
+                        android:background="@color/white"/>
+
+                    <TextView
+                        android:text="View information about crops"
+                        android:textSize="15sp"
+                        android:layout_width="0dp"
+                        android:layout_column="1"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="@dimen/text_margin"
+                        android:background="@color/white"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="message"
+                    tools:layout_editor_absoluteY="25dp"
+                    tools:layout_editor_absoluteX="8dp">
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_column="0"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+
+                        android:onClick="message"
+
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/message_green_icon"
+                        android:background="@color/white"/>
+
+                    <TextView
+                        android:text="Message your teacher"
+                        android:textSize="15sp"
+                        android:layout_width="0dp"
+                        android:layout_column="1"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/text_margin"
+                        android:gravity="center"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="update"
+                    tools:layout_editor_absoluteY="25dp"
+                    tools:layout_editor_absoluteX="8dp">
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_column="0"
+
+                        android:onClick="update"
+
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_update_green_24dp"
+                        android:background="@color/white"/>
+
+                    <TextView
+                        android:text="Check for updates to your crop library"
+                        android:textSize="15sp"
+                        android:layout_width="0dp"
+                        android:layout_column="1"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="@dimen/text_margin"
+                        android:background="@color/white"
+                        />
+
+                </TableRow>
+            </TableLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>
