@@ -1,4 +1,42 @@
-This is a repo containing both the android application and the web application
+# FarmAid
 
-how to create, add, commit, and push files to a repo
-https://www.howtoforge.com/tutorial/install-git-and-github-on-ubuntu-14.04/
+## A Mobile Agricultural Knowledge Dissemination Android Application
+FarmAid is a platform for knowledge sharing between two parties in a teacher-learner relationship within the agricultural sphere. The system takes the form of a web application used by teachers to upload relevant information about agricultural best practice, and a mobile application used by learners to access this information and communicate with their teacher.
+
+## Getting Started
+The code for the mobile app is available at:
+https://github.com/Barak-Setton/FarmAid
+
+### Prerequisites
+An Android device with minimum SDK version 15
+
+### Installing
+
+The Android app can be installed on a device through extracting and installing the FarmAid apk.
+
+### Logging in
+The account used for testing:
+* Email: robbie@gmail.com
+* Password: 12345
+
+## Deployment
+
+There is the potential for the Android app to be released through the Google Play store upon further development and debugging.
+
+## Built With
+
+* Android Studio - Java and XML coding, as well as emulator testing and 9 patch image editing
+* GitHub - Version control
+
+## Authors
+
+Jeremy Bishop
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
+## Acknowledgments
+
+Aslam Safla - the project's supervisor and product owner.
+Lighton Phiri - The project's second reader.
